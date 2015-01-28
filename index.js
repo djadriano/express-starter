@@ -8,7 +8,8 @@ var routes  = require( './routes/app' )( io );
 
 // controllers
 
-var app_controller = require( './controllers/app' )( io );
+var app_controller = require( './controllers/app' );
+var io_controller  = require( './controllers/socket' );
 
 // template engine
 
@@ -22,18 +23,19 @@ app.use( express.static( __dirname + '/public' ) );
 
 app.use( '/', routes );
 
-io.on('connection', function( socket ) {
-
-  console.log('a user connected');
-
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-
-});
-
 // initialize server
 
 http.listen(3000, function(){
   console.log( 'listening on *:3000' );
+});
+
+
+io.on('connection', function( socket ) {
+
+  io_controller.initialize( io, socket );
+
+  socket.on('disconnect', function() {
+    io_controller.disconnect( socket.id );
+  });
+
 });

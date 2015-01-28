@@ -1,29 +1,29 @@
 // dependencies
 
-var express = require( 'express' );
-var config  = require( '../config/app' );
-var app     = express();
-var router  = express.Router();
+var express        = require( 'express' );
+var config         = require( '../config/app' );
+var io_controller  = require( '../controllers/socket' );
+var app            = express();
+var router         = express.Router();
 
-module.exports = function( io ) {
-
-  // controllers
-
-  var app_controller = require( '../controllers/app' )( io );
-
-  // initialize routes
+module.exports = function() {
 
   router.get('/', function( req, res ) {
-
     res.render('pages/index', {
-      generated_code: app_controller.generate_code(),
-      code_url      : config.code_url
+      code_url : config.code_url
     });
-
   });
 
   router.get('/mobile', function( req, res ) {
-    res.render('pages/mobile');
+    res.render( 'pages/mobile' );
+  });
+
+  router.get('/mobile/validate/:code', function( req, res ) {
+
+    io_controller.validateCode( req.params.code, function( valid ) {
+      res.render( 'pages/mobile' );
+    });
+
   });
 
   return router;

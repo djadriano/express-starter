@@ -1,2 +1,10 @@
+  <script>
+    var socket = io();
+    socket.emit('enterDesktop');
+
+    socket.on('generated_code', function( data ) {
+      document.querySelectorAll( '.generated-code' )[ 0 ].innerHTML = data;
+    });
+  </script>
 </body>
 </html>
