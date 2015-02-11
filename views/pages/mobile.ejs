@@ -1,12 +1,16 @@
 <% include ../partials/html_head %>
 
-  <main class="main">
+  <main class="main" ytio-mobile>
     <h1>Digite o código abaixo:</h1>
     <p>
-      <input type="text"> <input type="text"> <input type="text"> <input type="text">
+      <input type="text" ng-model="mobcode.a"> <input type="text" ng-model="mobcode.b"> <input type="text" ng-model="mobcode.c"> <input type="text" ng-model="mobcode.d">
     </p>
     <p>
-      <button>validate</button>
+      <button ng-click="validateCode()">validate</button>
+    </p>
+    <p ng-hide="!video.show">
+      video<br><br>
+      <a ng-click="playVideo()">play video</a> <a ng-click="pauseVideo()">pause video</a>
     </p>
   </main>
 

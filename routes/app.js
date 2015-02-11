@@ -18,14 +18,6 @@ module.exports = function() {
     res.render( 'pages/mobile' );
   });
 
-  router.get('/mobile/validate/:code', function( req, res ) {
-
-    io_controller.validateCode( req.params.code, function( valid ) {
-      res.render( 'pages/mobile' );
-    });
-
-  });
-
   return router;
 
 };

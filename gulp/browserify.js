@@ -6,7 +6,7 @@ var gulp      = require( 'gulp' ),
 
 module.exports = function() {
 
-  gulp.src( './source/javascripts/**/*.js' )
+  gulp.src( './source/javascripts/application.js' )
     .pipe(browserify({
       insertGlobals : false,
       debug         : false

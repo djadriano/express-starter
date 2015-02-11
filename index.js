@@ -35,6 +35,7 @@ io.on('connection', function( socket ) {
   io_controller.initialize( io, socket );
 
   socket.on('disconnect', function() {
+    console.log('disconnect');
     io_controller.disconnect( socket.id );
   });
 
